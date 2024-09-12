@@ -145,6 +145,12 @@ class ChineseReadability:
         with open(os.path.join(os.path.dirname(__file__), 'data/ci_jia.txt'), 'r', encoding='utf-8') as f:
             return set(f.read().splitlines())
 
+    def _load_custom_vocab(self, vocab_file_path=os.path.join(os.path.dirname(__file__), 'data/filtered_computer.vocab')):
+        with open(vocab_file_path, 'r', encoding='utf-8') as f:
+            lines = f.read().splitlines()
+            custom_vocab = set(line.split('\t')[0] for line in lines[:int(len(lines) * 0.16)])
+            self.jia_words.update(custom_vocab)
+
     def _load_char_freq(self):
         char_freq = {}
         with open(os.path.join(os.path.dirname(__file__), 'data/character_frequency.csv'), 'r', encoding='utf-8') as f:

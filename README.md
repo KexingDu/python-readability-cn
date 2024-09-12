@@ -41,6 +41,20 @@ $ pip install readability_cn
 
 ```
 
+### Use Custom Vocab
+
+You can use the sentencepiece tool to extract a vocabulary from specific domain documents, referring to the `custom_vocab.py` implementation in the `examples` directory. Then merge it into the top-level vocabulary for use:
+您可以通过 sentencepiece 工具，对特定领域文档提取词表，可以参考 `examples` 目录中的 `custom_vocab.py` 实现。然后合并到甲级词汇表中使用：
+
+```python
+    # Load the top 16% of custom vocabulary as common words in specific fields
+    # 可以加载自定义词表的前16%词汇作为特定领域的常用词汇
+    # Default to the vocabulary from Fudan University's computer science corpus
+    # 默认提供复旦大学计算机领域语料库的词表
+    readability._load_custom_vocab()
+    readability._load_custom_vocab("rizhiyi.vocab")
+```
+
 ## Note
 
 1. The research in this field in China is mainly concentrated in the area of teaching Chinese as a foreign language. The research data primarily consists of a small number of textbook passages and Chinese proficiency test outlines. The coefficients obtained from polynomial linear regression fitting may not be effective for native speakers or technical documents.
